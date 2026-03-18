@@ -1,0 +1,230 @@
+Started by user ruby
+Obtained Jenkinsfile from git https://github.com/rupanraj19/jenkins-eks-cicd-pipeline
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/lib/jenkins/workspace/flask-eks-pipeline
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/flask-eks-pipeline/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/rupanraj19/jenkins-eks-cicd-pipeline # timeout=10
+Fetching upstream changes from https://github.com/rupanraj19/jenkins-eks-cicd-pipeline
+ > git --version # timeout=10
+ > git --version # 'git version 2.34.1'
+ > git fetch --tags --force --progress -- https://github.com/rupanraj19/jenkins-eks-cicd-pipeline +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision e328a7120da54f65bb65d915267c12ad97c2949b (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f e328a7120da54f65bb65d915267c12ad97c2949b # timeout=10
+Commit message: "fix: remove terraform binaries and add gitignore"
+ > git rev-list --no-walk e328a7120da54f65bb65d915267c12ad97c2949b # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Checkout)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/flask-eks-pipeline/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/rupanraj19/jenkins-eks-cicd-pipeline # timeout=10
+Fetching upstream changes from https://github.com/rupanraj19/jenkins-eks-cicd-pipeline
+ > git --version # timeout=10
+ > git --version # 'git version 2.34.1'
+ > git fetch --tags --force --progress -- https://github.com/rupanraj19/jenkins-eks-cicd-pipeline +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision e328a7120da54f65bb65d915267c12ad97c2949b (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f e328a7120da54f65bb65d915267c12ad97c2949b # timeout=10
+Commit message: "fix: remove terraform binaries and add gitignore"
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build Docker Image)
+[Pipeline] sh
++ docker build -t 995004088219.dkr.ecr.us-east-1.amazonaws.com/flask-cicd-app:v2 .
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon  463.9kB
+Step 1/7 : FROM python:3.11-slim
+3.11-slim: Pulling from library/python
+ec781dee3f47: Pulling fs layer
+6944007a5b45: Pulling fs layer
+e35b92e2619d: Pulling fs layer
+7524aba74b8c: Pulling fs layer
+7524aba74b8c: Waiting
+6944007a5b45: Verifying Checksum
+6944007a5b45: Download complete
+7524aba74b8c: Verifying Checksum
+7524aba74b8c: Download complete
+ec781dee3f47: Verifying Checksum
+ec781dee3f47: Download complete
+e35b92e2619d: Verifying Checksum
+e35b92e2619d: Download complete
+ec781dee3f47: Pull complete
+6944007a5b45: Pull complete
+e35b92e2619d: Pull complete
+7524aba74b8c: Pull complete
+Digest: sha256:6d98ca198cea726f2c86da2699594339a7b7ff08e49728797b4ed6e3b5c3b62a
+Status: Downloaded newer image for python:3.11-slim
+ ---> e67db9b14d09
+Step 2/7 : WORKDIR /app
+ ---> Running in 83887b57f652
+ ---> Removed intermediate container 83887b57f652
+ ---> eff203af4426
+Step 3/7 : COPY app/requirements.txt .
+ ---> 2e28560d1c2c
+Step 4/7 : RUN pip install -r requirements.txt
+ ---> Running in de137c643d67
+Collecting flask==3.0.0 (from -r requirements.txt (line 1))
+  Downloading flask-3.0.0-py3-none-any.whl.metadata (3.6 kB)
+Collecting Werkzeug>=3.0.0 (from flask==3.0.0->-r requirements.txt (line 1))
+  Downloading werkzeug-3.1.6-py3-none-any.whl.metadata (4.0 kB)
+Collecting Jinja2>=3.1.2 (from flask==3.0.0->-r requirements.txt (line 1))
+  Downloading jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+Collecting itsdangerous>=2.1.2 (from flask==3.0.0->-r requirements.txt (line 1))
+  Downloading itsdangerous-2.2.0-py3-none-any.whl.metadata (1.9 kB)
+Collecting click>=8.1.3 (from flask==3.0.0->-r requirements.txt (line 1))
+  Downloading click-8.3.1-py3-none-any.whl.metadata (2.6 kB)
+Collecting blinker>=1.6.2 (from flask==3.0.0->-r requirements.txt (line 1))
+  Downloading blinker-1.9.0-py3-none-any.whl.metadata (1.6 kB)
+Collecting MarkupSafe>=2.0 (from Jinja2>=3.1.2->flask==3.0.0->-r requirements.txt (line 1))
+  Downloading markupsafe-3.0.3-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.7 kB)
+Downloading flask-3.0.0-py3-none-any.whl (99 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 99.7/99.7 kB 8.6 MB/s eta 0:00:00
+Downloading blinker-1.9.0-py3-none-any.whl (8.5 kB)
+Downloading click-8.3.1-py3-none-any.whl (108 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 108.3/108.3 kB 11.6 MB/s eta 0:00:00
+Downloading itsdangerous-2.2.0-py3-none-any.whl (16 kB)
+Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 134.9/134.9 kB 14.4 MB/s eta 0:00:00
+Downloading werkzeug-3.1.6-py3-none-any.whl (225 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 225.2/225.2 kB 21.3 MB/s eta 0:00:00
+Downloading markupsafe-3.0.3-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (22 kB)
+Installing collected packages: MarkupSafe, itsdangerous, click, blinker, Werkzeug, Jinja2, flask
+Successfully installed Jinja2-3.1.6 MarkupSafe-3.0.3 Werkzeug-3.1.6 blinker-1.9.0 click-8.3.1 flask-3.0.0 itsdangerous-2.2.0
+[91mWARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+[0m[91m
+[notice] A new release of pip is available: 24.0 -> 26.0.1
+[notice] To update, run: pip install --upgrade pip
+[0m ---> Removed intermediate container de137c643d67
+ ---> 960bae39db96
+Step 5/7 : COPY app/ .
+ ---> a167c6aeb61f
+Step 6/7 : EXPOSE 5000
+ ---> Running in 9de5d477f1e0
+ ---> Removed intermediate container 9de5d477f1e0
+ ---> f736929da285
+Step 7/7 : CMD ["python", "app.py"]
+ ---> Running in 2c64e72b55a8
+ ---> Removed intermediate container 2c64e72b55a8
+ ---> 2a762805d966
+Successfully built 2a762805d966
+Successfully tagged 995004088219.dkr.ecr.us-east-1.amazonaws.com/flask-cicd-app:v2
++ docker tag 995004088219.dkr.ecr.us-east-1.amazonaws.com/flask-cicd-app:v2 995004088219.dkr.ecr.us-east-1.amazonaws.com/flask-cicd-app:latest
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Push to ECR)
+[Pipeline] withCredentials
+Masking supported pattern matches of $AWS_ACCESS_KEY_ID or $AWS_SECRET_ACCESS_KEY
+[Pipeline] {
+[Pipeline] sh
++ aws ecr get-login-password --region us-east-1
++ docker login --username AWS --password-stdin 995004088219.dkr.ecr.us-east-1.amazonaws.com/flask-cicd-app
+
+WARNING! Your credentials are stored unencrypted in '/var/lib/jenkins/.docker/config.json'.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/go/credential-store/
+
+Login Succeeded
++ docker push 995004088219.dkr.ecr.us-east-1.amazonaws.com/flask-cicd-app:v2
+The push refers to repository [995004088219.dkr.ecr.us-east-1.amazonaws.com/flask-cicd-app]
+4ba3d22d2d3f: Preparing
+8b8262bc537d: Preparing
+f2c00b338b44: Preparing
+88a2a00bfad0: Preparing
+8347a0657a00: Preparing
+34b037810a00: Preparing
+188695d9eb1d: Preparing
+188c9b34dfbe: Preparing
+34b037810a00: Waiting
+188695d9eb1d: Waiting
+188c9b34dfbe: Waiting
+f2c00b338b44: Pushed
+4ba3d22d2d3f: Pushed
+8347a0657a00: Pushed
+88a2a00bfad0: Pushed
+8b8262bc537d: Pushed
+188695d9eb1d: Pushed
+34b037810a00: Pushed
+188c9b34dfbe: Pushed
+v2: digest: sha256:6808ba2239be526f48003acc574cebba6596b8e8ac59327c0497afc1e84d24e4 size: 1990
++ docker push 995004088219.dkr.ecr.us-east-1.amazonaws.com/flask-cicd-app:latest
+The push refers to repository [995004088219.dkr.ecr.us-east-1.amazonaws.com/flask-cicd-app]
+4ba3d22d2d3f: Preparing
+8b8262bc537d: Preparing
+f2c00b338b44: Preparing
+88a2a00bfad0: Preparing
+8347a0657a00: Preparing
+34b037810a00: Preparing
+188695d9eb1d: Preparing
+188c9b34dfbe: Preparing
+34b037810a00: Waiting
+188695d9eb1d: Waiting
+188c9b34dfbe: Waiting
+88a2a00bfad0: Layer already exists
+4ba3d22d2d3f: Layer already exists
+8b8262bc537d: Layer already exists
+f2c00b338b44: Layer already exists
+8347a0657a00: Layer already exists
+34b037810a00: Layer already exists
+188c9b34dfbe: Layer already exists
+188695d9eb1d: Layer already exists
+latest: digest: sha256:6808ba2239be526f48003acc574cebba6596b8e8ac59327c0497afc1e84d24e4 size: 1990
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Deploy to EKS)
+[Pipeline] sh
++ aws eks update-kubeconfig --name jenkins-cicd-cluster --region us-east-1
+Updated context arn:aws:eks:us-east-1:995004088219:cluster/jenkins-cicd-cluster in /var/lib/jenkins/.kube/config
++ sed s|IMAGE_PLACEHOLDER|995004088219.dkr.ecr.us-east-1.amazonaws.com/flask-cicd-app:v2|g k8s/deployment.yaml
++ kubectl apply -f -
+deployment.apps/flask-app created
++ kubectl apply -f k8s/service.yaml
+service/flask-app-service created
++ kubectl rollout status deployment/flask-app
+Waiting for deployment "flask-app" rollout to finish: 0 of 2 updated replicas are available...
+Waiting for deployment "flask-app" rollout to finish: 1 of 2 updated replicas are available...
+deployment "flask-app" successfully rolled out
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Declarative: Post Actions)
+[Pipeline] echo
+Pipeline completed successfully! Flask app deployed to EKS.
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS

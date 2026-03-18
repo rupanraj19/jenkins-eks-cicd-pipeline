@@ -1,0 +1,92 @@
+Started by user ruby
+Obtained Jenkinsfile from git https://github.com/rupanraj19/jenkins-eks-cicd-pipeline
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/lib/jenkins/workspace/flask-eks-pipeline
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+Cloning the remote Git repository
+Cloning repository https://github.com/rupanraj19/jenkins-eks-cicd-pipeline
+ > git init /var/lib/jenkins/workspace/flask-eks-pipeline # timeout=10
+Fetching upstream changes from https://github.com/rupanraj19/jenkins-eks-cicd-pipeline
+ > git --version # timeout=10
+ > git --version # 'git version 2.34.1'
+ > git fetch --tags --force --progress -- https://github.com/rupanraj19/jenkins-eks-cicd-pipeline +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git config remote.origin.url https://github.com/rupanraj19/jenkins-eks-cicd-pipeline # timeout=10
+ > git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+Avoid second fetch
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision e328a7120da54f65bb65d915267c12ad97c2949b (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f e328a7120da54f65bb65d915267c12ad97c2949b # timeout=10
+Commit message: "fix: remove terraform binaries and add gitignore"
+First time build. Skipping changelog.
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Checkout)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/flask-eks-pipeline/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/rupanraj19/jenkins-eks-cicd-pipeline # timeout=10
+Fetching upstream changes from https://github.com/rupanraj19/jenkins-eks-cicd-pipeline
+ > git --version # timeout=10
+ > git --version # 'git version 2.34.1'
+ > git fetch --tags --force --progress -- https://github.com/rupanraj19/jenkins-eks-cicd-pipeline +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision e328a7120da54f65bb65d915267c12ad97c2949b (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f e328a7120da54f65bb65d915267c12ad97c2949b # timeout=10
+Commit message: "fix: remove terraform binaries and add gitignore"
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build Docker Image)
+[Pipeline] sh
++ docker build -t 995004088219.dkr.ecr.us-east-1.amazonaws.com/flask-cicd-app:v1 .
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Post "http://%2Fvar%2Frun%2Fdocker.sock/v1.50/build?dockerfile=Dockerfile&t=995004088219.dkr.ecr.us-east-1.amazonaws.com%2Fflask-cicd-app%3Av1&version=1": dial unix /var/run/docker.sock: connect: permission denied
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Push to ECR)
+Stage "Push to ECR" skipped due to earlier failure(s)
+[Pipeline] getContext
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Deploy to EKS)
+Stage "Deploy to EKS" skipped due to earlier failure(s)
+[Pipeline] getContext
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Declarative: Post Actions)
+[Pipeline] echo
+Pipeline failed. Check logs above.
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+ERROR: script returned exit code 1
+Finished: FAILURE
